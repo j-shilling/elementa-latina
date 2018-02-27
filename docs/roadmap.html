@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Elementa Latina Roadmap</title>
+</head>
+<body>
+
+<h1>Elementa Latina</h1>
+
+<p>Elementa Latina is meant to serve as a resource for Latin classrooms and to replace a 
+few existing websites: <a href="http://www.blackboard.com/">BlackBoard</a>, <a href="http://latin.ucant.org/">
+Whitaker's Words</a>, and <a href="http://www.perseus.tufts.edu/hopper/">The Perseus Projects</a>.
+We hope to accomplish the same tasks which these sites propose to, but to do so with more
+elegance and with a modern design.</p>
+
+<h2 id="01">Elementa Latina 0.1</h2>
+
+<p>The first release of Elementa Latina will be a simple online dictionary. Unlike virtually
+all current online dictionaries, we will produce a monolingual dictionary, with optional
+English translations, geared to show people how to use words actively and not simply to 
+passively translate--a version of the <a href="http://linguax.com/lexica/forc.php">Totius
+Lexicon Latinitatis</a> truly for the 21st century.</p>
+
+<p>The initial release, therefore, needs first to maintain a database of users and authenticate
+logins. It should also recognize 3 user roles: students, teachers, and administrators.
+With respect to the dictionary interface, only the administrators should be able to edit
+the dictionary on the site. Additionally both admins and teachers need to be able to create
+other users accounts, but while teachers can only create student accounts, admins can
+create and edit accounts of any time.</p>
+
+<p>Users need to be able to edit their own account preferences. In the initial release the
+available customizations will relate primarily to how the dictionary is presented to them:</p>
+
+<table id="prefs">
+
+	<tr>
+		<th>option</th>
+		<th>description</th>
+		<th>default</th>
+	</tr>
+	
+	<tr>
+		<td>Interface Language</td>
+		<td>Users should be able to view the website in at least English and Latin</td>
+		<td>English</td>
+	</tr>
+	
+	<tr>
+		<td>display macrons</td>
+		<td>Some people like to see macrons used over long vowels, while some do not.
+		Regardless of whether a long and short vowels are displayed differently, the application
+		needs to recognize in its representation of a word the length of each vowel</td>
+		<td>true</td>
+	<tr>
+	
+	<tr>
+		<td>display diaeresis</td>
+		<td>There are rare occasions where letters which would normally be pronounced
+		as one syllable are separated into to. A diaeresis over the second letter is
+		used to represent this.</td>
+		<td>true</td>
+	</tr>
+	
+	<tr>
+		<td>use 'j'</td>
+		<td>Some books like to use a j to represent the consonant version of an i, others
+		like to make Latin pointlessly harder to read.</td>
+		<td>false</td>
+	</tr>
+	
+	<tr>
+		<td>use 'v'</td>
+		<td>Some books like to use a v to represent the consonant version of a u, others
+		like to make Latin pointlessly harder to read.</td>
+		<td>true</td>
+	</tr>
+	
+	<tr>
+		<td>word click event</td>
+		<td>Whenever any Latin text is displayed a user should be able to click on a word
+		they do not know. When they make such a click, they may want to go to the full
+		dictionary page, or simply to see an English translation of the word, and possible
+		to see a Latin synonym of the word. These options should all be available.</td>
+		<td>show English translation</td>
+	</tr>
+	
+	<tr>
+		<td>search dictionary event</td>
+		<td>Just as users can configure what they see when they click on a word, they should
+		be able to customize the experience of searching the database. Our dictionary will story
+		English translations, Latin synonyms, Latin definitions, and example sentences for each
+		word. A user should be able to request that any of this information be shown or hidden</td>
+		<td>show all</td>
+	</tr>
+
+</table>
+
+<p>Administrative accounts need to be able to maintain the site's dictionary. To do this they
+need to create, edit and delete words from the lexicon. When an admin creates a word all regular,
+inflected forms should be added automatically, but the user needs to be able to change to any 
+robot-generated information. Creating high-quality monolingual definitions will be very time consuming 
+and so admins should be able to save incomplete entries; however, this also requires that they have easy
+access to the status of all dictionary entries to see what is and isn't finished</p>
+
+<p>Anyone--whether logged in or not--should be able to search the dictionary. When a non-logged in
+user searches the dictionary, default preferences should be used. When a user types in a Latin word
+information for all possible lexemes which that word can be derived from will be returned. (E.g. 'amicis'
+is could be a form of either 'amicus' or 'amica' and therefore both definitions should be returned.)
+Additionally, the dictionary should be aware of alternative spellings of word (E.g. if 'lacryma' is
+searched the standared spelling 'lacrima' will be returned.)</p>
+
+<p>When a user is reading a Latin definition of a word, they should be able to click on any of the words
+used in that definition and get the information specified in their user preferences for the clicked word</p>
+
+<p>The option should also be available to search English translations of Latin words. If the dictionary
+is set in English-Latin mode, typing in an English will return all word for which that is a stored translation
+(E.g. typing in 'for' will return 'enim', 'pro', etc.).</p>
+
+<h3>Development Information</h3>
+
+<ul>
+	<li><a href="01/db.html">Database Structure</a></li>
+	<li><a href="01/pages.html">Page Descriptions</a></li>
+	<li><a href="01/tasks.html">Development Tasks</a></li>
+</ul>
+
+<h2>Elementa Latina 0.1.1</h2>
+
+<p>Teachers can add their own words to private dictionaries. When a student account search for a word,
+any match in the site-wide dictionary or dictionaries associated with their teachers' accounts will be
+returned.</p>
+
+<h2>Elementa Latina 0.2</h2>
+
+<p>The second release will allow the site to be used for basic vocabulary training / assessment</p>
+
+<h2>Elementa Latina 0.3</h2>
+
+<p>The third release will introduce the site-wide library of Latin texts as well as teacher-specific libraries
+of readings for their classes</p>
+
+<h2>Elementa Latina 0.4</h2>
+
+<p>The fourth release will add the translation-grading mechanism.</p>
+
+<h2>Elementa Latina 0.5</h2>
+
+<p>The fifth release will implement the BlackBoard-lick features. Teachers will be able to create tests, quizzes
+and assignments to be automatically graded.</p>
+
+<h2>Elementa Latina 0.6</h2>
+
+<p>The sixth release will facilitate communication and file transfer between all types of user accounts.</p>
+
+<h2>Elementa Latina 1.0</h2>
+
+<p>The 1.0 release will indicate that the above features have been implemented and tested fully.<p>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="com.elementa.client.resources.AppResources"
+		field="res">
+	</ui:with>
+
+	<g:HTMLPanel>
+		<div class="{res.w3.Container}">
+			<div class="{res.w3.Section}">
+				<g:Label styleName="{res.theme.TextTheme}" ui:field="nameLbl" />
+				<g:SimplePanel ui:field="nameTxtBox" />
+			</div>
+			<div class="{res.w3.Section}">
+				<g:Label styleName="{res.theme.TextTheme}" ui:field="usernameLbl" />
+				<g:SimplePanel ui:field="usernameTxtBox" />
+			</div>
+			<div class="{res.w3.Section}">
+				<g:Label styleName="{res.theme.TextTheme}" ui:field="emailLbl" />
+				<g:SimplePanel ui:field="emailTxtBox" />
+			</div>
+			<div class="{res.w3.Section}">
+				<g:Label styleName="{res.theme.TextTheme}" ui:field="rolesLbl" />
+				<div class="{res.w3.Container}">
+					<g:CheckBox styleName="{res.w3.Margin}" ui:field="adminchk" />
+					<g:CheckBox styleName="{res.w3.Margin}" ui:field="teacherchk" />
+					<g:CheckBox styleName="{res.w3.Margin}" ui:field="studentchk" />
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

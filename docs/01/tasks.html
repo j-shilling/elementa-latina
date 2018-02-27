@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Elementa 0.1 Development Tasks</title>
+</head>
+<body>
+
+<p>Below is a list of tasks to be completed for the 0.1 release and the status of
+each task.</p>
+
+<ol type="1">
+	<li>Basic Site Mechanics
+		<ol type="1">
+			<li>Elements common to all site pages [DONE]
+				<ol type="1">
+					<li>Header [DONE]</li> 
+					<li>Footer [DONE]</li>
+					<li>Navigation Bar [DONE]</li>
+					<li>Uniform Content Area Format [DONE]</li>
+				</ol>
+			</li>
+			
+			<li>All constant strings are stored in an 
+				<a href="http://www.gwtproject.org/doc/latest/tutorial/i18n.html">internationalizable format</a></li>
+			<li>Site can display messages to the user</li>
+			<li>Site loads the dictionary page as its homepage</li>
+			<li>Users can navigate between pages</li>
+			<li>Page history is tracked so the user can use the browser's back button [DONE]</li>
+			<li>State of the application is preserved between page refreshes [DONE]</li>
+			<li>CSS library is ported to GWT-compatible format [DONE]</li>
+			<li>Client events can be logged on the server [DONE]</li>
+			<li>All uncaught exceptions are handled and logged [DONE]</li>
+			<li>Clicking on any Latin word will perform the task specified in the user's preferences</li>
+			<li>All Latin words are displayed according to the user's preferences</li>
+			<li>Server operations can be configured from a properties file [DONE]</li>
+		</ol>
+	</li>
+	
+	<li>User Accounts
+		<ol type="1">
+			<li>Server side DAO class sets up the <a href="db.html#users">User's table</a> and 
+			the <a href="db.html#usrrel">User Relationship's table</a> in its constructor</li>
+			<li>Server side DAO class sets up the initial admin account if the table is being
+			created for the first time</li>
+			<li>Server side DAO can add a new user</li>
+			<li>Server side DAO can delete a user</li>
+			<li>Server side DAO can edit a user</li>
+			<li>Admin accounts can create a new account of any type</li>
+			<li>When a student account is created, the account of the creating user is automatically
+			set as a parent account</li>
+			<li>Admin accounts can delete any existing account</li>
+			<li>When an account is deleted the <a href="db.html#usrrel">User Relationship's table</a>
+			is updated. If a child is now left without a parent, it is deactivated.</li>
+			<li>Admin accounts can edit any user account property except for user preferences.</li>
+			<li>Account information can be viewed for any account if 1) The owner is logged in,
+			2) The logged in user is an admin; 3) the logged in user is a parent account of
+			the one being viewed.</li>
+			<li>Admin accounts can view a list of all accounts on the server</li>
+			<li>Admin accounts can filter a list of all accounts on the server by any of the
+			properties saved in the <a href="db.html#users">User's table</a></li>
+			<li>Admin accounts can add a student as a child account of a teacher</li>
+			<li>Admin accounts can remove a student as a child account of a teacher</li>
+			<li>Teacher accounts can create student accounts only</li>
+			<li>Teacher accounts can can remove themselves as parent accounts of a student</li>
+			<li>Teacher accounts can edit any user account information for student accounts
+			which they are a parent account of</li>
+			<li>Teacher accounts can view a list of all accounts they are a parent account
+			of</li>
+			<li>Teacher accounts can filter a list of all accounts they are a parent of by any of the
+			properties saved in the <a href="db.html#users">User's table</a></li>
+			<li>Any logged in user can edit their own account <a href="../roadmap.html#prefs">preferences</a></li>
+			<li>User can log in through a login page</li>
+			<li>User can choose to stay logged in by saving information to a cookie</li>
+			<li>User's with deactivated accounts cannot log in</li>
+			<li>Deactivated accounts are deleted after a year of inactivity</li>
+		</ol>
+	</li>
+	
+	<li>Dictionary
+		<ol type="1">
+			<li>Texts DAO creates the <a href="db.html#authors">Authors table</a>, 
+			<a href="db.html#works">Works table</a>, and <a href="db.html#texts">Texts table</a> in
+			its constructor</li>
+			<li>Dictionary DAO creates the <a href="db.html#words">Words table</a>, 
+			<a href="db.html#uses">Uses table</a>, <a href="db.html#userel">Use Relationships table</a>,
+			<a href="db.html#synonyms">Synonyms table</a>, <a href="db.html#translations">Translations table</a>, 
+			and <a href="db.html#examples">Examples table</a> in its constructor.</li>
+			<li>Admin can add new words to the dictionary
+				<ol type="1">
+					<li>Texts DAO can create a new author</li>
+					<li>Texts DAO can create a new work</li>
+					<li>Texts DAO can create a new text</li>
+					<li>Dictionary DAO can create a new word</li>
+					<li>Dictionary DAO can create a new use</li>
+					<li>Dictionary DAO can create a new use relationship</li>
+					<li>Dictionary DAO can create a new translation</li>
+					<li>Dictionary DAO can create a new synonym</li>
+					<li>Dictionary DAO can create a new example</li>
+					<li>Sever generates word forms based on a string entered by the admin. This
+					string is in a standard dictionary format. Server returns a collection of words
+					created by assuming the forms are inflected regularly.</li>
+					<li>Server can understand that words separated by a '/' are alternate spellings
+					of the same word.</li>
+					<li>Server can understand that letters contains within '()'s are optional letters</li>
+					<li>Admin can add additional forms not generated by the server</li>
+					<li>Admin can delete superfluous forms generated by the server</li>
+					<li>Admin can edit the spelling, form, and vowel lengths of words
+					generated by the server.</li>
+					<li>Admin can save word forms to the <a href="db.html#words">Words table</a></li>
+					<li>When new words are saved to the <a href="db.html#words">Words table</a> a new
+					lexeme id is generated for all of them</li>
+					<li>Admin can add uses to be associated with a lexeme
+						<ol type="1">
+							<li>Admin can add a context description, in Latin, to explain when
+							that use is relevant</li>
+							<li>Admin can add a Latin definition to a use
+								<ol type="1">
+									<li>Words used in the Latin definition are automatically
+									search for in the dictionary to determine which lexeme they are</li>
+									<li>If the lexeme used is not in the dictionary, but has a form
+									the same as one in the dictionary, the admin can change the lexeme
+									from known to unkown.</li>
+									<li>If more than one lexeme has a form which matches a word used,
+									the admin can specify which lexeme is actually used</li>
+									<li>If the lexeme used has only one use, that use is automatically
+									selected</li>
+									<li>If a use is automatically selected because the true use has
+									yet to be entered, the admin can mark the use of a work as
+									unkown</li>
+									<li>If the lexeme has more than one use, the admin can select
+									which use is really being used.</li>
+								</ol>
+							</li>
+							<li>Admin can specify 0 or more synonyms for each use</li>
+							<li>Admin can specify 0 or more English translations for
+							each use</li>
+							<li>Admin can add 0 or more example sentences for each use
+								<ol type="1">
+									<li>Admin can register a new author to the
+									<a href="db.html#authors">Authors table</a></li>
+									<li>Admin can register a new work to the
+									<a href="db.html#works">Works table</a></li>
+									<li>Admin can save the text of an example to the
+									<a href="db.html#texts">Texts table</a></li>
+								</ol>
+							</li>
+						</ol>
+					</li>
+					<li>Admin can associate sub-uses with a super-use</li>
+					<li>Admin can save a use to the <a href="db.html#uses">Uses table</a></li>
+				</ol>
+			</li>
+			<li>Admin can view the status of words in the dictionary
+				<ol type="1">
+					<li>Admin can view a list of all lexemes in the dictionary</li>
+					<li>Admin can view a list of the status of all lexemes in the dictionary
+						<dl>
+							<dt>No Uses</dt>
+							<dd>Lexeme has no associated uses</dd>
+							<dt>No Definition</dt>
+							<dd>Lexeme has 1 or more uses which have no Latin definitions</dd>
+							<dt>No translations</dt>
+							<dd>Lexeme has 1 or more uses which have no translations</dd>
+							<dt>No examples</dt>
+							<dd>Lexeme has 1 or more uses which have no examples</dd>
+							<dt>Unknown word</dt>
+							<dd>Lexeme has 1 or more uses whose definition uses a word not
+							found in the dictionary</dd>
+							<dt>Unkown use</dt>
+							<dd>Lexeme has 1 or more uses whose definition uses a word which
+							is found in the dictionary, but that word's use is not specified</dd>
+						</dl>
+					</li>
+					<li>Admin can sort and filter the list of lexemes by the text of the lexeme
+					or the lexeme's status</li>
+				</ol>
+			</li>
+			<li>Admin can edit words in the dictionary
+				<ol type="1">
+					<li>Texts DAO can edit an existing author</li>
+					<li>Texts DAO can edit an existing work</li>
+					<li>Texts DAO can edit an existing text</li>
+					<li>Dictionary DAO can edit an existing word</li>
+					<li>Dictionary DAO can edit an existing use</li>
+					<li>Dictionary DAO can edit an existing use relationship</li>
+					<li>Dictionary DAO can edit an existing translation</li>
+					<li>Dictionary DAO can edit an existing synonym</li>
+					<li>Dictionary DAO can edit an existing example</li>
+					<li>Admin can edit an existing author</li>
+					<li>Admin can edit an existing work</li>
+					<li>Admin can edit an existing text</li>
+					<li>Admin can edit an existing word</li>
+					<li>Admin can edit an existing use</li>
+					<li>Admin can edit an existing use relationship</li>
+					<li>Admin can edit an existing translation</li>
+					<li>Admin can edit an existing synonym</li>
+					<li>Admin can edit an existing example</li>
+				</ol>
+			</li>
+			<li>Users can search words in the dictionary
+				<ol type="1">
+					<li>Users can search for a lexeme by typing in a Latin word</li>
+					<li>Users can search for a lexeme by typing in a translation</li>
+					<li>Results are desplayed to the user based on their user preferences</li>
+				</ol>
+			</li>
+		</ol>
+	</li>
+</ol>
+
+</body>
+</html>

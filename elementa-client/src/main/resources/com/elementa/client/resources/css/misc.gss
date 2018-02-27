@@ -1,0 +1,15 @@
+.navs-open {
+	margin-left: 25%;
+}
+
+.fill {
+	width: 100%;
+}
+
+.italic {
+	font-style: italic;
+}
+
+.normal {
+	font-style: normal;
+}

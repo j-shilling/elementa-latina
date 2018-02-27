@@ -1,0 +1,81 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.elementa.client"
+	xmlns:res="urn:with:elementa.client.resources.Resources">
+	
+	<ui:with type="com.elementa.client.resources.AppResources" field="res">
+	</ui:with>
+	
+	<g:PopupPanel 
+		autoHideOnHistoryEventsEnabled="true" 
+		autoHideEnabled="true" 
+		modal="true"
+		glassEnabled="true"
+		ui:field="panel"
+		
+		styleName=""
+		>
+		
+		<g:HTMLPanel ui:field="navPanel">
+			<nav class="{res.theme.Light5} {res.w3.Sidebar} {res.w3.Quarter}">
+				<g:Label ui:field="closeNav" 
+					addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+						{res.w3.PaddingSmall} {res.w3.Large}">
+				</g:Label>
+					
+				<g:FlowPanel ui:field="accountHider" addStyleNames="{res.w3.Hide}">
+					<g:Label ui:field="account"
+						addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+							{res.w3.PaddingSmall} {res.w3.Large}">
+					</g:Label>
+				</g:FlowPanel>
+					
+				<g:FlowPanel ui:field="loginHider">
+					<g:Label ui:field="login"
+						addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+							{res.w3.PaddingSmall} {res.w3.Large}">
+					</g:Label>
+				</g:FlowPanel>
+					
+				<g:FlowPanel ui:field="logoutHider" addStyleNames="{res.w3.Hide}">
+					<g:Label ui:field="logout"
+						addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+							{res.w3.PaddingSmall} {res.w3.Large}">
+					</g:Label>
+				</g:FlowPanel>
+				
+				<g:Label ui:field="dictionary"
+					addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+						{res.w3.PaddingSmall} {res.w3.Large}">
+				</g:Label>
+				
+				<g:FlowPanel ui:field="adminLinks" styleName="{res.w3.Hide}">
+						<g:Label ui:field="manageDictionary"
+							addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+								{res.w3.PaddingSmall} {res.w3.Large}">
+						</g:Label>
+				</g:FlowPanel>
+				
+				<g:FlowPanel ui:field="adminOrTeacherLinks" styleName="{res.w3.Hide}">
+						<g:Label ui:field="manageAccounts"
+							addStyleNames="{res.theme.Light5} {res.theme.HoverTheme} 
+								{res.w3.PaddingSmall} {res.w3.Large}">
+						</g:Label>
+				</g:FlowPanel>
+				
+				<g:FlowPanel ui:field="teacherLinks" styleName="{res.w3.Hide}">
+				
+				</g:FlowPanel>
+				
+				<g:FlowPanel ui:field="teacherOrStudentLinks" styleName="{res.w3.Hide}">
+				
+				</g:FlowPanel>
+				
+				<g:FlowPanel ui:field="studentLinks" styleName="{res.w3.Hide}">
+				
+				</g:FlowPanel>
+			</nav>
+		</g:HTMLPanel>	
+	</g:PopupPanel>
+</ui:UiBinder> 

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Elementa Latina 0.1 Database Tables</title>
+</head>
+<body>
+
+<p>This file describes the Database structure used in <a href="../roadmap.html#01">Elementa Latina 0.1</a>
+This release uses SQL databases. Local testing is done with MySQL, production with Google Datastore.</p>
+
+<h2>User Accounts</h2>
+
+<h3 id="users">Users Table</h3>
+
+<p>Stores the main user account information</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>UID</td>
+		<td>Int</td>
+		<td>NOT NULL, PRIMARY KEY, UNIQUE, AUTO_INCREMENT</td>
+		<td>An integer unique to each user. Because users can change their username,
+		this number is the only <i>guaranteed</i> way of identifying a specific
+		user account. This is the primary key of the table.</td>
+	<tr>
+	
+	<tr>
+		<td>Username</td>
+		<td>VARCHAR(25)</td>
+		<td>NOT NULL, UNIQUE</td>
+		<td>A username for this account. The name must be unque in the DB, but can
+		be changed by the user at any time. This is not a <i>guaranteed</i> way of 
+		identifying a specific user account, because the value my be changed by
+		the user in between queries</td>
+	</tr>
+	
+	<tr>
+		<td>Password</td>
+		<td>VARCHAR(300)</td>
+		<td>NOT NULL</td>
+		<td>The hash of a user's password. This value is only used to authenticate
+		users at login</td>
+	</tr>
+	
+	<tr>
+		<td>Credentials</td>
+		<td>VARCHAR(300)</td>
+		<td>NOT NULL, UNIQUE</td>
+		<td>A hashed string a little less secure than the user's password used for
+		authenticating logged in users. Because RESTful servers are stateless, the
+		only way for the server to recognized that a user has already logged in is
+		if this string is sent from the client in the HTTP request.</td>
+	<tr>
+	
+	<tr>
+		<td>Account Roles</td>
+		<td>TINYINT</td>
+		<td>NOT NULL</td>
+		<td>An integer representing the roles of a given user account. These roles
+		can be added together such that every unique combination of roles produces a
+		unique integer. 1 = admin; 2 = teacher; 4 = student. (i.e. 3 = 1 + 2 = Admin
+		and Teacher account. 6 = 2 + 4 = Student and Teacher account).
+	</td>
+	
+	<tr>
+		<td>Account Preferences</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>A POJO representing the preferences of the user.</td>
+	</tr>
+	
+	<tr>
+		<td>Active</td>
+		<td>TINYINT</td>
+		<td>NOT NULL</td>
+		<td>0 if the account is not active; 1 if the account is active</td>
+	</tr>
+	
+	<tr>
+		<td>Last Seen</td>
+		<td>TIMESTAMP</td>
+		<td>>NULL</td>
+		<td>The time the account was last logged in</td>
+	</tr>
+	
+	<tr>
+		<td>First Name</td>
+		<td>VARCHAR(25)</td>
+		<td>NULL</td>
+		<td>The first name of the account's owner</td>
+	</tr>
+	
+	<tr>
+		<td>Last Name</td>
+		<td>VARCHAR(25)</td>
+		<td>NULL</td>
+		<td>The last name of the account's owner</td>
+	</tr>
+	
+	<tr>
+		<td>Email</td>
+		<td>VARCHAR(25)</td>
+		<td>NULL</td>
+		<td>The email address of the account's owner</td>
+	</tr>
+
+</table>
+
+<h3 id="usrrel">Account Relationships</h3>
+
+<p>Future releases will rely heavily on the association between student accounts and the teacher
+accounts associated with them; however, this release will need to lay the foundation for that in
+its database structure. Moreover, knowing what teacher accounts govern a particular student account
+will be important when it comes to the account administration pages of the 0.1 release. These
+relationships are stored in their own table.</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>This is a number only used as the primary key of this table.</td>
+	</tr>
+	
+	<tr>
+		<td>Parent</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Users(UID)</td>
+		<td>The UID of the user account which governs the other</td>
+	</tr>
+	
+	<tr>
+		<td>Child</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Users(UID)</td>
+		<td>The UID of the user account which is governed by the other</td>
+	</tr>
+
+</table>
+
+<p>Whenever a user account is created a corresponding relationship must also be added where the new
+account is a child of the creating account. When an account is deleted, all of their relationships
+should also be deleted. Student accounts should be deleted automatically if they are no longer the 
+child of any other account. If a teacher account queries the database, results should be filtered to
+exclude any account that is not a child of their account.</p>
+
+<h2>Dictionary</h2>
+
+<h3 id="words">Words</h3>
+
+<p>All word forms of a given lexeme will be saved in their own database.</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Word ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Lexeme ID</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>An identifier of a particular lexeme. All words which share
+		a lexeme id are different forms of the same lexeme.</td>
+	
+	<tr>
+		<td>Text</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The text representing a given word. All macrons and other accent
+		marks should be removed and all 'j's and 'v's should be converted to 'i's
+		and 'u's. This allows use to match a word even if the user uses different
+		spelling conventions. String should be covernted to all lowercase chars</td>
+	</tr>
+		
+	<tr>
+		<td>Form</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>An integer which uniquely identifies a particular word form</td>
+	</tr>
+	
+	<tr>
+		<td>Word</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>A POJO representing the word.</td>
+	</tr>
+	
+</table>
+
+<p>There should be no two rows for which Lexeme ID, Text, and Form are all the same.</p>
+
+<h3 id="uses">Uses</h3>
+
+<p>Our dictionary thinks of definitions as a collection of uses that a word can have. When a
+word is searched for in the dictionary all associated uses will be returned. These uses need
+to be stored as separate entities for future releases.</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Use ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Lexeme ID</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>The lexeme this use is associated with</td>
+	</tr>
+	
+	<tr>
+		<td>Use</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>The POJO representing the Latin definition of the word.</td>
+	</tr>
+	
+</table>
+
+<p>Example sentences, Latin synonyms, and English translations will be stored in separate tables.</p>
+
+<h3 id="translations">Translations</h3>
+
+<p>Translations for each use are kept in a separate table</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Translation ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Use ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FORIEGN KEY REFERENCES Uses(Use ID)</td>
+		<td>Connections this entity to its corresponding use</td>
+	
+	<tr>
+		<td>Lexeme ID</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>The lexeme this translation is associated with</td>
+	</tr>
+	
+	<tr>
+		<td>Translation</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The test of the English translation.</td>
+	</tr>
+	
+</table>
+
+<h3 id="synonyms">Synonyms</h3>
+
+<p>Synonyms for each use are kept in a separate table</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Synonym ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Use ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FORIEGN KEY REFERENCES Uses(Use ID)</td>
+		<td>Connections this entity to its corresponding use</td>
+	
+	<tr>
+		<td>Lexeme ID</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>The lexeme this translation is associated with</td>
+	</tr>
+	
+	<tr>
+		<td>Synonymous Lexeme ID</td>
+		<td>INT</td>
+		<td>NOT NULL</td>
+		<td>The lexeme id of the synonym</td>
+	</tr>
+	
+</table>
+
+<h3">Example Sentences</h3>
+
+<p>Example sentences should be kept for each use of each word. These examples will ideally
+be drawn from authentic Latin texts and should therefore be connected in future releases with
+the site-wide library. Because of this, the databases for storing and associated texts should
+be implemented in this release. For every selection of text we want to use, there must be information
+about the work it comes from and the works author.</p>
+
+<h4 id="authors">Authors</h4>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Author ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>English Name</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The English name of the author, in all lowercase chars</td>
+	</tr>
+	
+	<tr>
+		<td>Latin Name Text</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The text of the Latin name in all lowercase with no accent marks.
+		all 'j's and 'v' replaced with 'i's and 'u's.</td>
+	</tr>
+	
+	<tr>
+		<td>Latin Name</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>A POJO representing the Latin name of the author</td>
+	</tr>
+	
+	<tr>
+		<td>abbreviated Name</td>
+		<td>VARCHAR(10)</td>
+		<td>NOT NULL, UNIQUE</td>
+		<td>The standard way of abbreviating the authors name in a citation</td>
+	</tr>
+	
+	<tr>
+		<td>birth year</td>
+		<td>INT</td>
+		<td>NULL</td>
+		<td>The year the author was born if known. Positive numbers represent C.E. years
+		and negative numbers represent B.C.E years</td>
+	</tr>
+	
+	<tr>
+		<td>death year</td>
+		<td>INT</td>
+		<td>NULL</td>
+		<td>The year the author died if known. Positive numbers represent C.E. years
+		and negative numbers represent B.C.E years</td>
+	</tr>
+
+</table>
+
+<p>If both the birth year and death year of an author are non-null, these dates are treated
+as known dates. If one is non-null, then that is treated as an approximate year of the author's
+life. (I.e. it will be presented to the use as 'Fl. 123 b.c.e.'). These columns are here for
+later releases which will need to sort authors chronologically.</p>
+
+<h4 id="works">Works</h4>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Work ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Author ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FORIEGN KEY REFERENCES Authors(Author ID)</td>
+		<td>The id of the author of this work</td>
+	</tr>
+	
+	<tr>
+		<td>English Title</td>
+		<td>VARCHAR(30)</td>
+		<td>NON NULL</td>
+		<td>The English title of the work in all lowercase chars</td>
+	</tr>
+	
+	<tr>
+		<td>Latin Title Text</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The text of the Latin title in all lowercase with no accent marks.
+		all 'j's and 'v' replaced with 'i's and 'u's.</td>
+	</tr>
+	
+	<tr>
+		<td>Latin Title</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>A POJO representing the work's Latin title</td>
+	</tr>
+	
+	<tr>
+		<td>Abbreviated Title</td>
+		<td>VARCHAR(10)</td>
+		<td>NOT NULL</td>
+		<td>The standard way of abbreviating this work's title in citations</td>
+	</tr>
+	
+	<tr>
+		<td>Year Written Earliest</td>
+		<td>INT</td>
+		<td>NULL</td>
+		<td>The earliest year the work may have been written if known. Positive 
+		numbers represent C.E. years and negative numbers represent B.C.E years</td>
+	</tr>
+	
+	<tr>
+		<td>Year Written Range Latest</td>
+		<td>INT</td>
+		<td>NULL</td>
+		<td>The latest year the work may have been written if known. Positive 
+		numbers represent C.E. years and negative numbers represent B.C.E years</td>
+	</tr>
+		
+</table>
+
+<p>If both Year Written Earliest and Year Written Latest have non-null values. These values
+are treated as the range in which the work may have been written. If only one of these columns
+has a non-null value, that value is treated as the exact year the work was written. These
+columns are here for future releases.</p>
+
+<h4 id="texts">Texts</h4>
+
+<p>The actual text of a Latin work must be saved in small chunks to account for the likelihood
+that an incomplete work will need to be saved or that a work may be added to the database
+out of order. These will also be important for future releases when teachers will need to work
+with only specific sections of a text. These checks, therefore, will need to have information
+about their order within a work in an intuitive format compatible with the standard ways of 
+citing sections of a Latin text.</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Text ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Work ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Works (Work ID)</td>
+		<td>The Work Id of the work this text is a part of</td>
+	</tr>
+	
+	<tr>
+		<td>Location</td>
+		<td>VARCHAR (30)</td>
+		<td>NOT NULL</td>
+		<td>The location of the text will be represented as a string of
+		numbers separated by '.'s or ':'s. If we want to save the 4th sentence of
+		the 1st paragraph of the 2nd Philipic the location would be "2.1.4".
+		It should be up to the user's discretion as too how specific to make
+		these chunks and so from the DB's point of view this string can be
+		arbitrarily long and as short as one single number. When searching
+		for a text by its location, we should return all sub-chunks of a given
+		chunk. (e.g. search "1.2 will return any location 1.2.*"). If a location
+		string is exactly one section more specific than any the closest saved
+		location, the right most number will represent a work within the saved text.
+		(E.g. if the DB contains only locations 1.2.1, 1.2.2, and 1.2.3 and the user
+		searches for 1.2.2.5, this should be interpreted as wanted the 5th word of
+		1.2.2; however, if the user searches for 1.2.2.5.1, this location is invalid.)</td>
+	</tr>
+	
+	<tr>
+		<td>Latin Text</td>
+		<td>VARCHAR (1000)</td>
+		<td>NOT NULL</td>
+		<td>The text of the Latin text in all lowercase with no accent marks.
+		all 'j's and 'v' replaced with 'i's and 'u's.</td>
+	</tr>
+	
+	<tr>
+		<td>Latin</td>
+		<td>BLOB</td>
+		<td>NOT NULL</td>
+		<td>A POJO representing the Latin text.</td>
+	</tr>
+
+</table>
+
+<h3 id="examples">Example Sentences</h3>
+
+<p>When the admin wants to provide an example of a given words use in the dictionary. This
+sentence should be saved as a selection of a work in the site wide library of future releases.
+Another table will then connect the uses of a lexeme to its examples.</p>
+
+<table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>Example ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the database.</td>
+	</tr>
+	
+	<tr>
+		<td>Use ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Uses(Use ID)</td>
+		<td>The id of the use for which this is an example.</td>
+	<tr>
+	
+	<tr>
+		<td>Work ID</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Texts (Work ID)</td>
+		<td>The id of the work this is taken from</td>
+	</tr>
+	
+	<tr>
+		<td>Start Location</td>
+		<td>VARCHAR(30)</td>
+		<td>NOT NULL</td>
+		<td>The location in the work of the example, or, if the example spans
+		multiple texts, the location of the beginning of the example.</td>
+	</tr>
+	
+	<tr>
+		<td>End Location</td>
+		<td>VARCHAR(30)</td>
+		<td>NULL</td>
+		<td>If the example spans multiple texts, this is the location of the
+		end of the example. Otherwise this column should be null.</td>
+	</tr>
+
+</table>
+
+<h3 id="userel">Use Relationships</h3>
+
+<p>Just has printed dictionary represent different uses of a works in terms of
+a hierarchy, our dictionary should be able to model the relationship between sub-uses
+and super-uses.</p>
+
+ <table>
+
+	<tr>
+		<th>Row</th>
+		<th>Type</th>
+		<th>Options</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>ID</td>
+		<td>INT</td>
+		<td>NOT NULL, AUTO_INCREMENT, UNIQUE, PRIMARY KEY</td>
+		<td>A primary key for the table</td>
+	</tr>
+	
+	<tr>
+		<td>Parent</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Uses(Use ID)</td>
+		<td>The id of the super-use</td>
+	</tr>
+	
+	<tr>
+		<td>Child</td>
+		<td>INT</td>
+		<td>NOT NULL, FOREIGN KEY REFERENCES Uses(Use ID)</td>
+		<td>The id of the sub-use</td>
+	</tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.elementa.client.widgets.paradigm">
+	<ui:with type="com.elementa.client.resources.AppResources" field="res" />
+	<ui:with type="com.elementa.client.StringConstants" field="constants" />
+	
+	<my:ParadigmTab>
+	
+		<my:ParadigmTab labelText="{constants.positive}">
+			<my:TwoColumnTable ui:field="mPos" labelText="{constants.masculine}"/>
+			<my:TwoColumnTable ui:field="fPos" labelText="{constants.feminine}"/>
+			<my:TwoColumnTable ui:field="nPos" labelText="{constants.neuter}"/>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.comparative}">
+			<my:TwoColumnTable ui:field="mCom" labelText="{constants.masculine}"/>
+			<my:TwoColumnTable ui:field="fCom" labelText="{constants.feminine}"/>
+			<my:TwoColumnTable ui:field="nCom" labelText="{constants.neuter}"/>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.superlative}">
+			<my:TwoColumnTable ui:field="mSup" labelText="{constants.masculine}"/>
+			<my:TwoColumnTable ui:field="fSup" labelText="{constants.feminine}"/>
+			<my:TwoColumnTable ui:field="nSup" labelText="{constants.neuter}"/>
+		</my:ParadigmTab>
+	
+	</my:ParadigmTab>
+</ui:UiBinder> 

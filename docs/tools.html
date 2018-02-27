@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Elementa Latina Tools</title>
+</head>
+<body>
+
+	<table>
+	
+		<tr>
+			<th>Name</th>
+			<th>Running On</th>
+			<th>Description</th>
+		</tr>
+		
+		<tr>
+			<td><a href="http://www.gwtproject.org/">GWT</a></td>
+			<td>client</td>
+			<td>GWT compiles java to javascript. All of Element is written in Java; however,
+				not all .java files end up running on the server's JVM. Instead GWT figures out
+				how to generate a front-end base one the java code we provide</td>
+		</tr>
+		
+		<tr>
+			<td><a href="https://dev.arcbees.com/gwtp/">GWTP</a></td>
+                        <td>hello</td>
+			<td>client</td>
+			<td>GWTP is an <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter">MVP</a>
+				framework for GWT. We use it to enforce better coding practices and to facilitate things like
+				<a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a> server calls;</td>
+		</tr>
+		
+		<tr>
+			<td><a href="https://github.com/nmorel/gwt-jackson">GWT-Jackson</a></td>
+			<td>client</td>
+			<td>GWTP is pulls in gwt-jackson as a dependency used for <a href="http://www.json.org/">JSON</a>
+				serialization. We can also use the same gwt-jackson annotations to customize the serialization
+				of our own objects. This is how we are able to make our objects <a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/immutable.html">
+				immutable</a>.
+		</tr>
+		
+		<tr>
+			<td><a href="https://code.google.com/archive/p/google-gin/">Google GIN</a></td>
+			<td>client</td>
+			<td>GWTP makes heavy use of <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency
+				Injection</a> using GIN. GIN is an implementation of Google's <a href="https://github.com/google/guice/wiki">
+				Guice</a>, which makes heavy use of <a href="https://docs.oracle.com/javase/tutorial/reflect/">java reflection
+				</a>. This is not supported on GWT and so to use Guice-like dependency injection we need to use GIN.
+		</tr>
+		
+		<tr>
+		
+			<td><a href="https://github.com/google/guava/wiki">Google Guava</a></td>
+			<td>client / server</td>
+			<td>Google's Guava is a collection of generally usefull classes. Primarily we are interested in
+				their <a href="https://github.com/google/guava/wiki/ImmutableCollectionsExplained">immutable
+				collections</a> and <a href="https://github.com/google/guava/wiki/CollectionUtilitiesExplained#multimaps">
+				multimaps</a>.</td>
+		</tr>
+		
+		<tr>
+			<td><a href="https://github.com/google/guice/wiki">Google Guice</a></td>
+			<td>server</td>
+			<td>The sever-side framework for <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency
+				Injection</a>.</td>
+		</tr>
+		
+		<tr>
+			<td><a href="http://resteasy.jboss.org/">RESTEasy</a></td>
+			<td>server</td>
+			<td>Our <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a> framework
+				for the backend stuff.</td>
+		</tr>
+	
+	</table>
+
+</body>
+</html>

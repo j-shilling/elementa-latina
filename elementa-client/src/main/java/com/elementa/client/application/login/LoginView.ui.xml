@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.elementa.client"
+	xmlns:res="urn:with:elementa.client.resources.Resources">
+	
+	<ui:with type="com.elementa.client.resources.AppResources" field="res">
+	</ui:with>
+	
+	<g:HTMLPanel>
+		<form class="{res.w3.Section}">
+			<div class="{res.w3.Container}">
+				<g:TextBox ui:field="username" addStyleNames="{res.theme.Light5} {res.w3.Input}"></g:TextBox>
+				<label>Username</label>
+				
+				<g:PasswordTextBox ui:field="password" addStyleNames="{res.theme.Light5} {res.w3.Input}"></g:PasswordTextBox>
+				<label>Password</label>
+			</div>
+	
+			<div class="{res.w3.CellRow} {res.w3.Padding}">
+				<div class="{res.w3.Cell} {res.w3.CellMiddle}">
+					<g:CheckBox ui:field="remember" styleName="{res.w3.Left}" />
+				</div>
+				
+				<g:SimplePanel ui:field="ActionBtnPanel" styleName="{res.w3.Right}" />
+			</div>
+		</form>
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

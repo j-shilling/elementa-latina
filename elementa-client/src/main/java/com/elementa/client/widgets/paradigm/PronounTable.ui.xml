@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.elementa.client.widgets.paradigm">
+	<ui:with type="com.elementa.client.StringConstants" field="constants" />
+	
+	<my:ParadigmTab>
+	
+		<my:TwoColumnTable ui:field="m" labelText="{constants.masculine}"/>
+		<my:TwoColumnTable ui:field="f" labelText="{constants.feminine}"/>
+		<my:TwoColumnTable ui:field="n" labelText="{constants.neuter}"/>
+	
+	</my:ParadigmTab>
+</ui:UiBinder> 

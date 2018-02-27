@@ -1,0 +1,111 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.elementa.client.widgets.paradigm">
+	<ui:with type="com.elementa.client.StringConstants" field="constants" />
+	
+	<my:ParadigmTab>
+	
+		<my:ParadigmTab labelText="{constants.indicative}">
+			<my:ParadigmTab labelText="{constants.active}">
+				<my:TwoColumnTable ui:field="presentActiveIndicative" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="imperfectActiveIndicative" labelText="{constants.imperfect}"/>
+				<my:TwoColumnTable ui:field="futureActiveIndicative" labelText="{constants.future}"/>
+				<my:TwoColumnTable ui:field="perfectActiveIndicative" labelText="{constants.perfect}"/>
+				<my:TwoColumnTable ui:field="pluperfectActiveIndicative" labelText="{constants.pluperfect}"/>
+				<my:TwoColumnTable ui:field="futurePerfectActiveIndicative" labelText="{constants.futurePerfect}"/>
+			</my:ParadigmTab>
+			
+			<my:ParadigmTab labelText="{constants.passive}">
+				<my:TwoColumnTable ui:field="presentPassiveIndicative" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="imperfectPassiveIndicative" labelText="{constants.imperfect}"/>
+				<my:TwoColumnTable ui:field="futurePassiveIndicative" labelText="{constants.future}"/>
+				<my:TwoColumnTable ui:field="perfectPassiveIndicative" labelText="{constants.perfect}"/>
+				<my:TwoColumnTable ui:field="pluperfectPassiveIndicative" labelText="{constants.pluperfect}"/>
+				<my:TwoColumnTable ui:field="futurePerfectPassiveIndicative" labelText="{constants.futurePerfect}"/>
+			</my:ParadigmTab>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.subjunctive}">
+			<my:ParadigmTab labelText="{constants.active}">
+				<my:TwoColumnTable ui:field="presentActiveSubjunctive" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="imperfectActiveSubjunctive" labelText="{constants.imperfect}"/>
+				<my:TwoColumnTable ui:field="perfectActiveSubjunctive" labelText="{constants.perfect}"/>
+				<my:TwoColumnTable ui:field="pluperfectActiveSubjunctive" labelText="{constants.pluperfect}"/>
+			</my:ParadigmTab>
+			
+			<my:ParadigmTab labelText="{constants.passive}">
+				<my:TwoColumnTable ui:field="presentPassiveSubjunctive" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="imperfectPassiveSubjunctive" labelText="{constants.imperfect}"/>
+				<my:TwoColumnTable ui:field="perfectPassiveSubjunctive" labelText="{constants.perfect}"/>
+				<my:TwoColumnTable ui:field="pluperfectPassiveSubjunctive" labelText="{constants.pluperfect}"/>
+			</my:ParadigmTab>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.imperative}">
+			<my:ParadigmTab labelText="{constants.active}">
+				<my:TwoColumnTable ui:field="presentActiveImperative" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="futureActiveImperative" labelText="{constants.future}"/>
+			</my:ParadigmTab>
+			
+			<my:ParadigmTab labelText="{constants.passive}">
+				<my:TwoColumnTable ui:field="presentPassiveImperative" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="futurePassiveImperative" labelText="{constants.future}"/>
+			</my:ParadigmTab>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.infinitive}">
+			<my:ParadigmTab labelText="{constants.active}">
+				<my:TwoColumnTable ui:field="presentActiveInfinitive" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="futureActiveInfinitive" labelText="{constants.future}"/>
+				<my:TwoColumnTable ui:field="perfectActiveInfinitive" labelText="{constants.perfect}"/>
+			</my:ParadigmTab>
+			
+			<my:ParadigmTab labelText="{constants.passive}">
+				<my:TwoColumnTable ui:field="presentPassiveInfinitive" labelText="{constants.present}"/>
+				<my:TwoColumnTable ui:field="futurePassiveInfinitive" labelText="{constants.future}"/>
+				<my:TwoColumnTable ui:field="perfectPassiveInfinitive" labelText="{constants.perfect}"/>
+			</my:ParadigmTab>
+		</my:ParadigmTab>
+		
+		<my:ParadigmTab labelText="{constants.participle}">
+			<my:ParadigmTab labelText="{constants.active}">
+				<my:ParadigmTab labelText="{constants.present}">
+					<my:TwoColumnTable ui:field="presentActiveParticipleMasculine" labelText="{constants.masculine}"/>
+					<my:TwoColumnTable ui:field="presentActiveParticipleFeminine" labelText="{constants.feminine}"/>
+					<my:TwoColumnTable ui:field="presentActiveParticipleNeuter" labelText="{constants.neuter}"/>
+				</my:ParadigmTab>
+				
+				<my:ParadigmTab labelText="{constants.future}">
+					<my:TwoColumnTable ui:field="futureActiveParticipleMasculine" labelText="{constants.masculine}"/>
+					<my:TwoColumnTable ui:field="futureActiveParticipleFeminine" labelText="{constants.feminine}"/>
+					<my:TwoColumnTable ui:field="futureActiveParticipleNeuter" labelText="{constants.neuter}"/>
+				</my:ParadigmTab>
+				
+				<my:ParadigmTab labelText="{constants.perfect}">
+					<my:TwoColumnTable ui:field="perfectActiveParticipleMasculine" labelText="{constants.masculine}"/>
+					<my:TwoColumnTable ui:field="perfectActiveParticipleFeminine" labelText="{constants.feminine}"/>
+					<my:TwoColumnTable ui:field="perfectActiveParticipleNeuter" labelText="{constants.neuter}"/>
+				</my:ParadigmTab>
+			</my:ParadigmTab>
+			
+			<my:ParadigmTab labelText="{constants.passive}">
+				<my:ParadigmTab labelText="{constants.perfect}">
+					<my:TwoColumnTable ui:field="perfectPassiveParticipleMasculine" labelText="{constants.masculine}"/>
+					<my:TwoColumnTable ui:field="perfectPassiveParticipleFeminine" labelText="{constants.feminine}"/>
+					<my:TwoColumnTable ui:field="perfectPassiveParticipleNeuter" labelText="{constants.neuter}"/>
+				</my:ParadigmTab>
+				
+				<my:ParadigmTab labelText="{constants.future}">
+					<my:TwoColumnTable ui:field="futurePassiveParticipleMasculine" labelText="{constants.masculine}"/>
+					<my:TwoColumnTable ui:field="futurePassiveParticipleFeminine" labelText="{constants.feminine}"/>
+					<my:TwoColumnTable ui:field="futurePassiveParticipleNeuter" labelText="{constants.neuter}"/>
+				</my:ParadigmTab>
+			</my:ParadigmTab>
+		</my:ParadigmTab>
+		
+		<my:TwoColumnTable ui:field="gerund" labelText="{constants.gerund}" />
+		<my:OneColumnTable ui:field="supine" labelText="{constants.supine}" />
+	
+	</my:ParadigmTab>
+</ui:UiBinder> 

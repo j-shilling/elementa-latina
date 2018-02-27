@@ -1,0 +1,36 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with type="com.elementa.client.resources.AppResources" field="res">
+	</ui:with>
+	
+	<g:PopupPanel 
+		autoHideOnHistoryEventsEnabled="true" 
+		autoHideEnabled="true" 
+		modal="true"
+		glassEnabled="true"
+		
+		addStyleNames="{res.theme.Light5}">
+		<g:FocusPanel ui:field="focus">
+		
+			<g:HTMLPanel styleName="{res.w3.Margin}" >
+				<g:Label ui:field="header" styleName="{res.w3.Section}" />
+		
+				<form class="{res.w3.CellRow}">
+					<div class="{res.w3.Cell} {res.w3.CellTop} {res.w3.Mobile} {res.w3.Margin}">
+						<g:Label ui:field="usernameLbl" />
+						<g:SimplePanel ui:field="username" />
+						
+						<g:Label ui:field="passwordLbl" />
+						<g:SimplePanel ui:field="password" />
+					</div>
+			
+					<div class="{res.w3.Cell} {res.w3.CellBottom} {res.w3.Mobile">
+						<g:SimplePanel ui:field="ActionBtnPanel" styleName="{res.w3.MarginLeft}"/>
+					</div>
+				</form>
+			</g:HTMLPanel>
+		
+		</g:FocusPanel>
+	</g:PopupPanel>
+</ui:UiBinder> 

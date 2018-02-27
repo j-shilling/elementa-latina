@@ -1,0 +1,19 @@
+.theme-l5 {color:#000 !important; background-color:#e9f5ff !important}
+.theme-l4 {color:#000 !important; background-color:#b5dffd !important}
+.theme-l3 {color:#000 !important; background-color:#6bc0fc !important}
+.theme-l2 {color:#fff !important; background-color:#21a0fa !important}
+.theme-l1 {color:#fff !important; background-color:#0479cc !important}
+.theme-d1 {color:#fff !important; background-color:#024575 !important}
+.theme-d2 {color:#fff !important; background-color:#023e68 !important}
+.theme-d3 {color:#fff !important; background-color:#02365b !important}
+.theme-d4 {color:#fff !important; background-color:#022e4e !important}
+.theme-d5 {color:#fff !important; background-color:#012641 !important}
+
+.theme-light {color:#000 !important; background-color:#e9f5ff !important}
+.theme-dark {color:#fff !important; background-color:#012641 !important}
+.theme-action {color:#fff !important; background-color:#012641 !important}
+
+.theme {color:#fff !important; background-color:#034f84 !important}
+.text-theme {color:#034f84 !important}
+.theme-border {border-color:#034f84 !important}
+.hover-theme:hover {color:#fff !important; background-color:#034f84 !important}
